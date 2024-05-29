@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+    <style>
+        .form-control {
+            margin-bottom: 10px;
+        }
+        .form-control-file {
+            margin-bottom: 10px;
+        }
+        .btn {
+            margin-top: 5px;
+        }
+        .flash-message {
+            color: #f00;
+            font-weight: bold;
+            text-align: center;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .text-center p {
+            margin-top: 15px;
+        }
+        .text-center a {
+            color: #007bff;
+            text-decoration: none;
+        }
+        .text-center a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <h2>Register</h2>
+
+    {% for message in get_flashed_messages() %}
+    <div class="flash-message">{{ message }}</div>
+    {% endfor %}
+
+    <form action="{{ url_for('register') }}" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <label for="username">Username</label>
+        {{ form.username(class="form-control", id="username") }}
+        <br>
+        <label for="password">Password</label>
+        {{ form.password(class="form-control", id="password") }}
+        <br>
+        <label for="email">Email</label>
+        {{ form.email(class="form-control", id="email") }}
+        <br>
+        <label for="mobile_number">Mobile Number</label>
+        {{ form.mobile_number(class="form-control", id="mobile_number") }}
+        <br>
+        <label for="profile_photo">Profile Photo</label>
+        {{ form.profile_photo(class="form-control-file", id="profile_photo") }}
+        <br><br>
+        {{ form.submit(class="btn btn-dark", style="width: 100%;") }}
+    </form>
+    <div class="text-center mt-3">
+        <p>Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+    </div>
+{% endblock %}

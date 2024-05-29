@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}
+Edit Profile
+{% endblock %}
+
+{% block content %}
+    <h2>Edit Profile</h2>
+
+    {% for message in get_flashed_messages() %}
+    <div class="flash-message">{{ message }}</div>
+    {% endfor %}
+
+    <form action="{{ url_for('edit_profile') }}" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <label for="username">Username</label>
+        {{ form.username(class="form-control", id="username", value=user.username) }}
+        <br>
+        <label for="email">Email</label>
+        {{ form.email(class="form-control", id="email", value=user.email) }}
+        <br>
+        <label for="mobile_number">Mobile Number</label>
+        {{ form.mobile_number(class="form-control", id="mobile_number", value=user.mobile_number) }}
+        <br>
+        <label for="profile_photo">Profile Photo</label>
+        <input type="file" id="profile_photo" name="profile_photo" class="form-control-file">
+        <br>
+        <input type="submit" value="Update Profile" class="btn btn-dark" style="width: 100%;">
+    </form>
+    <br>
+    <a href="{{ url_for('profile') }}" class="btn btn-secondary">Back to Profile</a>
+{% endblock %}

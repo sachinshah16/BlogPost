@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}
+About Us
+{% endblock %}
+
+{% block content %}
+    <style>
+        .about-container {
+            margin-top: 40px;
+        }
+        .about-container h2, .about-container h3 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .about-container p {
+            text-align: justify;
+            font-size: 1.1em;
+            line-height: 1.6em;
+            color: #34495e;
+        }
+        .about-container a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+        .about-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+
+    <div class="container about-container">
+        <h2>About Us</h2>
+        <p>Welcome to our BlogPost application! Our platform allows you to share your thoughts, read posts from others, and connect with a community of like-minded individuals. We strive to foster a vibrant and engaging environment for all users.</p>
+        
+        <h3>Our Mission</h3>
+        <p>Our mission is to provide a robust platform for people to express their ideas, share knowledge, and engage in meaningful discussions. We believe in the transformative power of words and their potential to impact the world positively.</p>
+        
+        <h3>Our Team</h3>
+        <p>We are a dedicated team of passionate developers, designers, and writers committed to creating a seamless and enjoyable user experience. Our team is constantly working on new features and improvements to ensure that our platform meets the needs of our diverse user base.</p>
+        
+        <h3>Contact Us</h3>
+        <p>If you have any questions, feedback, or suggestions, please don't hesitate to reach out to us through our <a href="{{ url_for('contact') }}">Contact Us</a> page. We value your input and look forward to hearing from you!</p>
+    </div>
+{% endblock %}

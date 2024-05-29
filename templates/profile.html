@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Profile
+{% endblock %}
+
+{% block content %}
+    <style>
+        .profile-info {
+            display: flex;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .profile-photo {
+            margin-right: 20px;
+        }
+        .profile-details p {
+            margin: 0;
+            padding: 5px 0;
+        }
+        .edit_profile {
+            text-align: left;
+            margin-bottom: 20px;
+        }
+        .blog-posts {
+            list-style-type: none;
+            padding: 0;
+        }
+        .blog-posts li {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .blog-posts h3 {
+            margin-top: 0;
+        }
+        .blog-posts form {
+            display: inline;
+        }
+    </style>
+
+    <h1>Profile</h1>
+    <div class="edit_profile">
+        <a href="{{ url_for('edit_profile') }}" class="btn btn-secondary">Edit Profile</a>
+    </div>
+    <div class="profile-info">
+        <div class="profile-photo">
+            <img src="{{ user.image }}" alt="Profile" class="img-thumbnail" width="150" height="150"> <br>
+        </div>
+        <div class="profile-details">
+            <p><strong>Name:</strong> {{ user.username }}</p>
+            <p><strong>Email:</strong> {{ user.email }}</p>
+            <p><strong>Contact Number:</strong> {{ user.mobile_number }}</p>
+        </div>
+    </div>
+    <br>
+    <h2>Your Blog Posts</h2>
+    <ul class="blog-posts">
+        {% for post in user.posts %}
+        <li>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content }}</p>
+            <a href="{{ url_for('edit_post', post_id=post.id) }}" class="btn btn-primary">Edit</a>
+            <form action="{{ url_for('delete_post', post_id=post.id) }}" method="post" style="display:inline;">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <button type="submit" class="btn btn-danger">Delete</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

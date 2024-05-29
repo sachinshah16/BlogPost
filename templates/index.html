@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="text-center">Welcome to the Blog Post App</h1>
+
+        {% for message in get_flashed_messages() %}
+        <div class="alert alert-info flash-message" role="alert">{{ message }}</div>
+        {% endfor %}
+
+        <div class="my-4">
+            <form method="GET" action="{{ url_for('home') }}" class="form-inline justify-content-center">
+                <input class="form-control mr-2" type="search" name="query" placeholder="Search" aria-label="Search" value="{{ request.args.get('query', '') }}">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+
+        <hr>
+
+        <div class="my-4">
+            {% if current_user.is_authenticated %}
+            <a href="{{ url_for('new_post') }}" class="btn btn-primary">Post a New Blog</a>
+            {% else %}
+            <p><a href="{{ url_for('login') }}">Login</a> to post a new blog.</p>
+            {% endif %}
+        </div>
+
+        <h2 class="my-4">Blog Posts</h2>
+        <div class="row">
+        {% for post in posts %}
+            <div class="col-md-6 mb-4">
+                <div class="card" style="background-color: rgb(198, 196, 196);">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ post.title }}</h3>
+                        <p class="card-text">{{ post.content }}</p>
+                        <p class="text-muted">by {{ post.author.username }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+{% endblock %}
